@@ -56,4 +56,5 @@ text4.pack(pady=5)
 deleted_task_listBox = tk.Listbox(root, height=10, width=100, bg="red")
 deleted_task_listBox.pack(pady=5, padx=5)
 
+
 root.mainloop()
