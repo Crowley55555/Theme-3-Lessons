@@ -17,4 +17,5 @@ entry.pack()
 button = tk.Button(root, text="Ввести имя", command=name)
 button.pack()
 
+
 root.mainloop()
