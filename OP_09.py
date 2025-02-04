@@ -3,6 +3,9 @@ import datetime
 import time
 import threading
 import random
+from telebot import types
+import json
+import os
 
 bot = telebot.TeleBot('7795687126:AAFcz0gtTEy94lUjrntsHiFBk9zEb_3F2kk')
 
@@ -11,19 +14,25 @@ def start_message(message):
     bot.reply_to(message, 'Привет! Я чат бот который будет напоминать тебе что можно жить лучше!')
     reminder_thread = threading.Thread(target=send_reminders, args=(message.chat.id,))
     reminder_thread.start()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    fact_button = types.KeyboardButton("Получить мотивашку")
+    markup.add(fact_button)
 
+    bot.send_message(message.chat.id, "Выберите действие:", reply_markup=markup)
 
 @bot.message_handler(commands=['fact'])
 def fact_message(message):
-    list = ["**Каждый день — новый шанс сделать шаг к своей мечте!**",
-            "**Трудности — это ступеньки к успеху, не бойся их преодолевать!**",
-            "**Ты способен на большее, чем думаешь. Верь в себя!**",
-            "**Не откладывай на завтра то, что может изменить твою жизнь сегодня!**",
-            "**Каждый маленький шаг приближает тебя к большой цели.**",
-            "**Мы не можем изменить прошлое, но мы можем начать сегодня делать лучшим свое завтра**"]
-    random_fact = random.choice(list)
-    bot.reply_to(message, f'Лови мотивашку {random_fact}')
-
+    with open("motivaxa.txt", encoding="utf-8") as file:
+        list = [line.strip() for line in file if line.strip()]
+        random_fact = random.choice(list)
+        bot.reply_to(message, f'Лови мотивашку {random_fact}')
+        send_messages.add(random_fact)
+@bot.message_handler(content_types=['text'])
+def handle_text(message):
+    if message.text == "Получить мотивашку":
+        fact_message(message)
+    else:
+        bot.send_message(message.chat.id, "Пожалуйста, выберите действие из меню.")
 send_messages = set()
 
 def send_reminders(chat_id):
@@ -61,6 +70,5 @@ def send_reminders(chat_id):
             time.sleep(61)
             continue
         time.sleep(1)
-
 
 bot.polling(none_stop=True)
