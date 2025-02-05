@@ -23,9 +23,9 @@ def completed_task():
 root = tk.Tk()
 root.geometry("500x800")
 root.title("task list")
-root.configure(background="black")
+root.configure(background="SlateGray4")
 
-text1 = tk.Label(root, text="Введите задачу", bg="blue4")
+text1 = tk.Label(root, text="Введите задачу", bg="white")
 text1.pack(pady=5)
 
 task_entry = tk.Entry(root, width=30, bg="pink")
@@ -40,20 +40,20 @@ delete_button.pack(pady=5)
 mark_button = tk.Button(root, text="Отметить выполненную задачу", bg="green", command=completed_task)
 mark_button.pack(pady=5)
 
-text2 = tk.Label(root, text="Список задач")
+text2 = tk.Label(root, text="Список задач", bg="yellow")
 text2.pack(pady=5)
 
 task_listBox = tk.Listbox(root, height=10, width=100, bg="dark turquoise")
 task_listBox.pack(pady=5, padx=5)
 
-text3 = tk.Label(root, text="Выполненные задачи")
+text3 = tk.Label(root, text="Выполненные задачи", bg="green")
 text3.pack(pady=5)
-completed_tasks_listBox = tk.Listbox(root, height=10, width=100, bg="light green")
+completed_tasks_listBox = tk.Listbox(root, height=10, width=100, bg="dark turquoise")
 completed_tasks_listBox.pack(pady=5, padx=5)
 
-text4 = tk.Label(root, text="Удаленные задачи")
+text4 = tk.Label(root, text="Удаленные задачи", bg="red")
 text4.pack(pady=5)
-deleted_task_listBox = tk.Listbox(root, height=10, width=100, bg="red")
+deleted_task_listBox = tk.Listbox(root, height=10, width=100, bg="dark turquoise")
 deleted_task_listBox.pack(pady=5, padx=5)
 
 
