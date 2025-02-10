@@ -1,9 +1,4 @@
 import telebot
-from telebot import types
-import sqlite3
-import schedule
-import time
-import threading
 
 # Инициализация бота
 TOKEN = '8159160029:AAFqOA0ec8ZlCkZgYBUIjbZ_jA2K007AqdA'
